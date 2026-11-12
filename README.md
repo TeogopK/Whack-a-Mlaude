@@ -24,6 +24,8 @@ Or just ask Claude to do it...
 
 ## Play
 
+![Whack-a-Mlaude demo](./assets/demo.gif)
+
 While Claude works, a game area appears above the prompt. It looks like agent output: it shows your session's real prompts, tool calls and replies. Now and then a character slowly turns into a little mole, `(•ω•)`, popping out of the dirt. Hover over it to whack it. When Claude finishes, the game goes away and you get a short end-of-round summary.
 
 - Hover over the mole to whack it.
