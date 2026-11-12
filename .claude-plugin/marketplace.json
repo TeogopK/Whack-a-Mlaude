@@ -1,0 +1,5 @@
+{
+  "name": "whack-a-mlaude",
+  "owner": { "name": "TeogopK" },
+  "plugins": [{ "name": "whack-a-mlaude", "source": "./" }]
+}

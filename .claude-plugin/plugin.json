@@ -1,0 +1,160 @@
+{
+  "name": "whack-a-mlaude",
+  "version": "0.1.0",
+  "author": { "name": "TeogopK" },
+  "license": "MIT",
+  "description": "Whack-a-Mlaude: an unofficial whack-a-mole that hides in your terminal while Claude Code is working. Real session text, a score that carries over, and a short end-of-round summary.",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "enabled": {
+      "type": "boolean",
+      "title": "Enabled",
+      "description": "Show the game while a turn is running.",
+      "default": true
+    },
+    "height": {
+      "type": "number",
+      "title": "Height (rows)",
+      "description": "Rows the game area takes above the prompt, score row included.",
+      "default": 10,
+      "min": 4,
+      "max": 40
+    },
+    "speed": {
+      "type": "number",
+      "title": "Speed",
+      "description": "Overall game speed multiplier: 2 = moles come twice as often and hide twice as fast.",
+      "default": 1,
+      "min": 0.25,
+      "max": 4
+    },
+    "maxMoles": {
+      "type": "number",
+      "title": "Moles at once",
+      "description": "Most moles that can be out at the same time.",
+      "default": 3,
+      "min": 1,
+      "max": 12
+    },
+    "spawnMinMs": {
+      "type": "number",
+      "title": "Spawn interval min (ms)",
+      "description": "Shortest wait before the next mole appears (at speed 1).",
+      "default": 500,
+      "min": 100,
+      "max": 10000
+    },
+    "spawnMaxMs": {
+      "type": "number",
+      "title": "Spawn interval max (ms)",
+      "description": "Longest wait before the next mole appears (at speed 1).",
+      "default": 1300,
+      "min": 100,
+      "max": 10000
+    },
+    "lifetimeMs": {
+      "type": "number",
+      "title": "Mole lifetime (ms)",
+      "description": "How long a mole takes to grow, hold and shrink back (at speed 1).",
+      "default": 2200,
+      "min": 500,
+      "max": 10000
+    },
+    "spawnMinRow": {
+      "type": "number",
+      "title": "Spawn area: first row",
+      "description": "Moles only appear from this row down (0 = top row of the game area).",
+      "default": 0,
+      "min": 0,
+      "max": 39
+    },
+    "spawnMaxRow": {
+      "type": "number",
+      "title": "Spawn area: last row",
+      "description": "Moles only appear down to this row; -1 = the bottom row of the text area.",
+      "default": -1,
+      "min": -1,
+      "max": 39
+    },
+    "ramp": {
+      "type": "boolean",
+      "title": "Ramp difficulty",
+      "description": "Game speeds up as your score grows.",
+      "default": true
+    },
+    "hover": {
+      "type": "boolean",
+      "title": "Hover to whack",
+      "description": "On: moving the pointer over a mole whacks it. Off: click it.",
+      "default": true
+    },
+    "marker": {
+      "type": "boolean",
+      "title": "Pointer marker",
+      "description": "Softly highlight the character under the pointer and flash a spark when you hit a mole. Off = no cursor is drawn at all.",
+      "default": false
+    },
+    "showScore": {
+      "type": "boolean",
+      "title": "Show score",
+      "description": "Show the score and missed counter on the bottom row of the game area.",
+      "default": true
+    },
+    "keepScore": {
+      "type": "boolean",
+      "title": "Keep score between prompts",
+      "description": "Carry your score over from one prompt to the next instead of starting at 0 each time.",
+      "default": true
+    },
+    "rememberScore": {
+      "type": "boolean",
+      "title": "Remember score between sessions",
+      "description": "Also save the score when a session ends and load it in the next one.",
+      "default": false
+    },
+    "summary": {
+      "type": "boolean",
+      "title": "End-of-round summary",
+      "description": "Show a congratulations summary when Claude finishes. Lines come from hooks/messages.ts.",
+      "default": true
+    },
+    "compactSummary": {
+      "type": "boolean",
+      "title": "Compact summary",
+      "description": "Make the end-of-round summary small and quiet: just 'N whacked | N missed' for 3 seconds, without the joke line.",
+      "default": false
+    },
+    "pauseSpamCount": {
+      "type": "number",
+      "title": "Pause-spam limit",
+      "description": "Pausing this many times within the window earns a cheeky comment.",
+      "default": 10,
+      "min": 3,
+      "max": 100
+    },
+    "pauseSpamWindowSec": {
+      "type": "number",
+      "title": "Pause-spam window (s)",
+      "description": "How many seconds the pause-spam count covers.",
+      "default": 20,
+      "min": 3,
+      "max": 300
+    },
+    "scrollMs": {
+      "type": "number",
+      "title": "Scroll speed (ms)",
+      "description": "Roughly how often the real session text scrolls by one line.",
+      "default": 2200,
+      "min": 300,
+      "max": 10000
+    },
+    "flashMs": {
+      "type": "number",
+      "title": "Start flash (ms)",
+      "description": "Length of a short flash shown before the game appears (0 = no flash, the default).",
+      "default": 0,
+      "min": 0,
+      "max": 2000
+    }
+  }
+}
