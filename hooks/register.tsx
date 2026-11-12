@@ -98,9 +98,13 @@ type MergedCfg = Record<string, number | boolean>
 
 // Pausing too often too quickly earns a cheeky comment. A top-level function
 // so the engine can follow `$` into it.
-async function setPaused($: any, want: boolean | 'toggle', spam: Spam): Promise<string> {
+// Its inputs are module variables, so `$` is the only argument it takes.
+let pauseWant: boolean | 'toggle' = 'toggle'
+let pauseSpamCfg: Spam = { count: 10, windowMs: 20000 }
+async function setPaused($: any): Promise<string> {
+  const spam = pauseSpamCfg
   const cur: UiState = (await read($, ui)) ?? DEFAULT_UI
-  const paused = want === 'toggle' ? !cur.paused : want
+  const paused = pauseWant === 'toggle' ? !cur.paused : pauseWant
   await update($, ui, (u: UiState | undefined) => ({ ...(u ?? DEFAULT_UI), paused }))
   let text = paused ? 'paused' : 'resumed'
 
@@ -153,7 +157,10 @@ async function runCommand(
     return `whack: ${word === 'hide' ? 'hidden' : 'shown'}`
   }
   if (word === 'pause' || word === 'resume') {
-    return `whack: ${await setPaused($, word === 'pause', spam)}`
+    pauseWant = word === 'pause'
+    pauseSpamCfg = spam
+    const pausedText = await setPaused($)
+    return `whack: ${pausedText}`
   }
   if (word === 'restart') {
     await restartGame($)
@@ -285,7 +292,9 @@ export const register: Register = (on, options) => {
         live = { hits: msg.hits, misses: msg.misses }
       }
     } else if (msg?.cmd === 'pause') {
-      await setPaused($, 'toggle', spam)
+      pauseWant = 'toggle'
+      pauseSpamCfg = spam
+      await setPaused($)
     } else if (msg?.cmd === 'hide') {
       await update($, ui, (u: UiState | undefined) => {
         const cur = u ?? DEFAULT_UI
@@ -392,7 +401,7 @@ export const register: Register = (on, options) => {
     }
 
     const cfg = merged(o)
-    const { Box, Text, Client } = $.ui.resolve(e)
+    const { Box, Text } = $.ui.resolve(e)
 
     if (current === 'flash') {
       const fill = '▒'.repeat(Math.max(1, e.props.bodyColumns - 1))
@@ -407,20 +416,19 @@ export const register: Register = (on, options) => {
       )
     }
 
-    return (
-      <Client
-        key={`game${u.epoch}`}
-        module="./game.tsx"
-        props={{
-          ...cfg,
-          paused: u.paused,
-          startHits: banked.hits,
-          startMisses: banked.misses,
-          feed: feed.slice(-80),
-        }}
-        width="100%"
-        height={cfg.height}
-      />
-    )
+    const game = h('Client', {
+      key: `game${u.epoch}`,
+      module: './game.tsx',
+      props: {
+        ...cfg,
+        paused: u.paused,
+        startHits: banked.hits,
+        startMisses: banked.misses,
+        feed: feed.slice(-80),
+      },
+      width: '100%',
+      height: cfg.height,
+    })
+    return typeof game === 'object' && game !== null ? game : next(e)
   })
 }

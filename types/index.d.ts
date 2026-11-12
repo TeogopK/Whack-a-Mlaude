@@ -20,15 +20,3 @@ export type Overrides = {
 export type UiState = { hidden: boolean; paused: boolean; epoch: number }
 
 export type Score = { hits: number; misses: number }
-
-declare module 'claude-code' {
-  interface PluginState {
-    'whack-a-mlaude': {
-      phase: Phase
-      tick: number
-      overrides: Shaped<Overrides>
-      ui: Shaped<UiState>
-      score: Shaped<Score>
-    }
-  }
-}
