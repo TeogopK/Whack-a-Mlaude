@@ -8,6 +8,7 @@
   "repository": "https://github.com/TeogopK/Whack-a-Mlaude",
   "homepage": "https://github.com/TeogopK/Whack-a-Mlaude",
   "supportUrl": "https://github.com/TeogopK/Whack-a-Mlaude/issues",
+  "privacyPolicyUrl": "https://github.com/TeogopK/Whack-a-Mlaude#privacy",
   "description": "Claude Code plugin for looking ultra-focused while Claude does the hard work. While Claude is working, a whack-a-mole game appears above your prompt. It looks like agent output and uses your session's real prompts, tool calls and replies. Now and then a character slowly turns into a little mole. Hover over it to whack it. Unofficial, not affiliated with Anthropic.",
   "types": "./types/state.d.ts",
   "userConfig": {

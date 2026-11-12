@@ -32,6 +32,10 @@ While Claude works, a game area appears above the prompt. It looks like agent ou
 - Click the game area to focus it. Press `p` to pause, and `h` if the boss is looking.
 - Run `/whack help` to see all the options you can configure.
 
+## Privacy
+
+Whack-a-Mlaude runs entirely on your machine. It collects no data, makes no network requests and sends nothing anywhere. It only displays text from your current session (prompts, tool calls and replies) in the game area, keeps it in memory for that session, and forgets it on reload. The one thing it can store is your score, locally, and only if you turn on `rememberScore` in `/config`.
+
 ## Footnotes
 
 Before installing random stuff verify that the code is not malicious with your own tool!
