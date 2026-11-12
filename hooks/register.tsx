@@ -91,6 +91,7 @@ const HELP = [
   '/whack speed|moles|height|lifetime|spawnmin|spawnmax|scroll <number>',
   '/whack marker|hover|ramp|score|summary|compact [on|off]',
   'In the game area (click it once to focus): p pause, h hide, r restart.',
+  'More settings (spawn area, score handling, pause-spam and more) are in /config.',
 ].join('\n')
 
 type MergedCfg = Record<string, number | boolean>
