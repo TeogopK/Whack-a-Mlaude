@@ -1,9 +1,11 @@
 {
   "name": "whack-a-mlaude",
   "version": "0.1.0",
-  "author": { "name": "TeogopK" },
+  "author": {
+    "name": "TeogopK"
+  },
   "license": "MIT",
-  "description": "Whack-a-Mlaude: an unofficial whack-a-mole that hides in your terminal while Claude Code is working. Real session text, a score that carries over, and a short end-of-round summary.",
+  "description": "Claude Code plugin for looking ultra-focused while Claude does the hard work. While Claude is working, a whack-a-mole game appears above your prompt. It looks like agent output and uses your session's real prompts, tool calls and replies. Now and then a character slowly turns into a little mole. Hover over it to whack it. Unofficial, not affiliated with Anthropic.",
   "types": "./types/index.d.ts",
   "userConfig": {
     "enabled": {
